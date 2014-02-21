@@ -1,20 +1,20 @@
 package by.segg3r.net;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import by.segg3r.task.Task;
-import by.segg3r.task.TaskFactory;
+import by.segg3r.net.task.AbstractTask;
+import by.segg3r.net.task.impl.StreamInitializationTask;
 
 /**
  * The Class Client.
  */
 public class Client extends Thread {
 
-	private DataInputStream in;
-	private DataOutputStream out;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 
 	/**
 	 * Instantiates a new client.
@@ -25,8 +25,10 @@ public class Client extends Thread {
 	 *             if socket stream are impossible to get.
 	 */
 	public Client(Socket socket) throws IOException {
-		this.in = new DataInputStream(socket.getInputStream());
-		this.out = new DataOutputStream(socket.getOutputStream());
+		this.out = new ObjectOutputStream(socket.getOutputStream());
+		out.writeObject(new StreamInitializationTask());
+
+		this.in = new ObjectInputStream(socket.getInputStream());
 	}
 
 	/*
@@ -38,12 +40,13 @@ public class Client extends Thread {
 	public void run() {
 		try {
 			while (true) {
-				int taskId = in.readInt();
-				Task task = TaskFactory.getClassFromFactory(taskId);
+				AbstractTask task = (AbstractTask) in.readObject();
 				task.execute();
 			}
 		} catch (IOException e) {
 			System.out.println("Lost server connection");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error reading server task");
 		}
 	}
 
@@ -53,8 +56,12 @@ public class Client extends Thread {
 	 * @param task
 	 *            the task
 	 */
-	public void sendTask(Task task) {
-		task.writeDataToStream(out);
+	public void sendTask(AbstractTask task) {
+		try {
+			out.writeObject(task);
+		} catch (IOException e) {
+			System.out.println("Error sending task to server");
+		}
 	}
 
 }
