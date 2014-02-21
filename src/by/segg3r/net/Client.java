@@ -40,6 +40,7 @@ public class Client extends Thread {
 			while (true) {
 				int taskId = in.readInt();
 				Task task = TaskFactory.getClassFromFactory(taskId);
+				task.readDataFromStream(in);
 				task.execute();
 			}
 		} catch (IOException e) {
