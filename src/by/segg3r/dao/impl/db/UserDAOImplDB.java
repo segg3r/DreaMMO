@@ -14,6 +14,10 @@ import by.segg3r.entities.User;
  */
 public class UserDAOImplDB implements IUserDAO {
 
+	public static final String TABLE_NAME = "users";
+	public static final String LOGIN_FIELD = "login";
+	public static final String PASSWORD_FIELD = "password";
+
 	/**
 	 * Instantiates a new user dao impl db.
 	 */
@@ -28,16 +32,37 @@ public class UserDAOImplDB implements IUserDAO {
 	 * java.lang.String)
 	 */
 	public User registerUser(String login, String password) throws DAOException {
-		System.out.println("Registering user with login " + login);
 		synchronized (UserDAOImplDB.class) {
+			System.out.println("Registering user with login " + login);
 			List<User> existingUsersWithSameLogin = DBEntityDAOService
 					.getEntitiesByCriteria(User.class,
-							Restrictions.eq("login", login));
+							Restrictions.eq(LOGIN_FIELD, login));
 			if (!existingUsersWithSameLogin.isEmpty()) {
-				throw new DAOException("User with this login already exists");
+				throw new DAOException(
+						IUserDAO.Errors.USER_ALREADY_EXISTS_ERROR);
 			}
 			User user = new User(login, password);
 			return DBEntityDAOService.saveEntity(user);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.segg3r.dao.ifaces.IUserDAO#getUser(java.lang.String,
+	 * java.lang.String)
+	 */
+	public User getUser(String login, String password) throws DAOException {
+		synchronized (UserDAOImplDB.class) {
+			System.out.println("Logging in user with login " + login);
+			List<User> users = DBEntityDAOService.getEntitiesByCriteria(
+					User.class, Restrictions.eq(LOGIN_FIELD, login),
+					Restrictions.eq(PASSWORD_FIELD, password));
+			if (users.isEmpty()) {
+				throw new DAOException(
+						IUserDAO.Errors.WRONG_LOGIN_PASSWORD_COMBINATION);
+			}
+			return users.get(0);
 		}
 	}
 }

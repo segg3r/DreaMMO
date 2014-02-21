@@ -6,7 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import by.segg3r.net.task.AbstractTask;
-import by.segg3r.net.task.impl.StreamInitializationTask;
+import by.segg3r.tasks.ClientTaskEnvironment;
+import by.segg3r.tasks.StreamInitializationTask;
 
 /**
  * The Class Client.
@@ -15,6 +16,7 @@ public class Client extends Thread {
 
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
+	private ClientTaskEnvironment clientTaskEnvironment;
 
 	/**
 	 * Instantiates a new client.
@@ -29,6 +31,7 @@ public class Client extends Thread {
 		out.writeObject(new StreamInitializationTask());
 
 		this.in = new ObjectInputStream(socket.getInputStream());
+		this.clientTaskEnvironment = new ClientTaskEnvironment(this);
 	}
 
 	/*
@@ -41,7 +44,7 @@ public class Client extends Thread {
 		try {
 			while (true) {
 				AbstractTask task = (AbstractTask) in.readObject();
-				task.execute();
+				clientTaskEnvironment.executeTask(task);
 			}
 		} catch (IOException e) {
 			System.out.println("Lost server connection");

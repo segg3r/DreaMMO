@@ -1,20 +1,26 @@
 package by.segg3r.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import by.segg3r.dao.impl.db.UserDAOImplDB;
 
 /**
  * The Class User.
  */
 @Entity
-@Table(name = "users")
-public class User extends AbstractDBEntity {
+@Table(name = UserDAOImplDB.TABLE_NAME)
+public class User extends AbstractDBEntity implements Serializable {
 
-	@Column(name = "login")
+	private static final long serialVersionUID = 3013255069027924406L;
+
+	@Column(name = UserDAOImplDB.LOGIN_FIELD)
 	private String login;
 
-	@Column(name = "password")
+	@Column(name = UserDAOImplDB.PASSWORD_FIELD)
 	private String password;
 
 	/**

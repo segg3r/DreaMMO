@@ -1,5 +1,7 @@
 package by.segg3r.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +11,9 @@ import javax.persistence.MappedSuperclass;
  * The Class AbstractDBEntity.
  */
 @MappedSuperclass
-public abstract class AbstractDBEntity {
+public abstract class AbstractDBEntity implements Serializable {
+
+	private static final long serialVersionUID = 7038765984750242361L;
 
 	@Id
 	@Column(name = "id")

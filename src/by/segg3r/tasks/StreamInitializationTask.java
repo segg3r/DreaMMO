@@ -1,4 +1,4 @@
-package by.segg3r.net.task.impl;
+package by.segg3r.tasks;
 
 import by.segg3r.net.task.AbstractTask;
 

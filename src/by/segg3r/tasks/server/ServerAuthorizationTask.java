@@ -1,30 +1,34 @@
-package by.segg3r.net.task.impl.client;
+package by.segg3r.tasks.server;
 
 import by.segg3r.dao.DAOFactory;
 import by.segg3r.dao.exceptions.DAOException;
 import by.segg3r.dao.ifaces.IUserDAO;
 import by.segg3r.entities.User;
 import by.segg3r.net.task.AbstractTask;
+import by.segg3r.net.task.exceptions.TaskExecutionException;
+import by.segg3r.tasks.client.ClientSuccessfullAuthorizationTask;
 
 /**
- * The Class ClientRegistrationTask.
+ * The Class ClientAuthorizationTask.
  */
-public class ClientRegistrationTask extends AbstractTask {
+public class ServerAuthorizationTask extends AbstractTask {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3402653989197611624L;
 
 	private String login;
 	private String password;
 
+	private User user;
+
 	/**
-	 * Instantiates a new client registration task.
+	 * Instantiates a new client authorization task.
 	 * 
 	 * @param login
 	 *            the login
 	 * @param password
 	 *            the password
 	 */
-	public ClientRegistrationTask(String login, String password) {
+	public ServerAuthorizationTask(String login, String password) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -36,15 +40,23 @@ public class ClientRegistrationTask extends AbstractTask {
 	 * @see by.segg3r.net.task.AbstractTask#execute()
 	 */
 	@Override
-	public void execute() {
-		IUserDAO userDAO = DAOFactory.getUserDAO();
+	public void execute() throws TaskExecutionException {
 		try {
-			User user = userDAO.registerUser(login, password);
-			System.out.println("Registered user id = " + user.getId());
+			IUserDAO userDAO = DAOFactory.getUserDAO();
+			user = userDAO.getUser(login, password);
 		} catch (DAOException e) {
-			System.out.println("Error registering user with login " + login);
+			throw new TaskExecutionException(e.getMessage());
 		}
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.segg3r.net.task.AbstractTask#getSucceedTask()
+	 */
+	@Override
+	public AbstractTask getSucceedTask() {
+		return new ClientSuccessfullAuthorizationTask(user);
 	}
 
 	/**
@@ -84,5 +96,4 @@ public class ClientRegistrationTask extends AbstractTask {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 }
