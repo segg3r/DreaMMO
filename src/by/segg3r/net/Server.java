@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.segg3r.task.Task;
+import by.segg3r.net.task.Task;
 
 /**
  * The Class Server.

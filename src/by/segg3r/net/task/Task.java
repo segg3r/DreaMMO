@@ -1,4 +1,4 @@
-package by.segg3r.task;
+package by.segg3r.net.task;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

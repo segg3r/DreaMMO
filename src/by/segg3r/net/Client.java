@@ -5,8 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import by.segg3r.task.Task;
-import by.segg3r.task.TaskFactory;
+import by.segg3r.net.task.Task;
+import by.segg3r.net.task.TaskFactory;
 
 /**
  * The Class Client.

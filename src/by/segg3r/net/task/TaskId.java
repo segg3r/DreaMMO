@@ -1,4 +1,4 @@
-package by.segg3r.task;
+package by.segg3r.net.task;
 
 public enum TaskId {
 
