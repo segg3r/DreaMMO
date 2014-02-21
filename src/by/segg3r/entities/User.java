@@ -17,6 +17,21 @@ public class User extends AbstractDBEntity {
 	@Column(name = "password")
 	private String password;
 
+	/**
+	 * Instantiates a new user.
+	 */
+	public User() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new user.
+	 * 
+	 * @param login
+	 *            the login
+	 * @param password
+	 *            the password
+	 */
 	public User(String login, String password) {
 		super();
 		this.login = login;
@@ -75,6 +90,17 @@ public class User extends AbstractDBEntity {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [login=" + login + ", password=" + password + ", getId()="
+				+ getId() + "]";
 	}
 
 }

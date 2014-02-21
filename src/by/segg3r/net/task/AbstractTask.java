@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public abstract class AbstractTask implements Serializable {
 
-	private static final long serialVersionUID = -8283010802522560930L;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Instantiates a new task.

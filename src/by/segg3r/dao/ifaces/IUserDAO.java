@@ -1,5 +1,6 @@
-package by.segg3r.dao;
+package by.segg3r.dao.ifaces;
 
+import by.segg3r.dao.exceptions.DAOException;
 import by.segg3r.entities.User;
 
 /**
@@ -16,6 +17,6 @@ public interface IUserDAO {
 	 *            the password
 	 * @return the user
 	 */
-	User registerUser(String login, String password);
+	User registerUser(String login, String password) throws DAOException;
 
 }
