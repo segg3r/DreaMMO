@@ -5,14 +5,14 @@ import by.segg3r.dao.IUserDAO;
 import by.segg3r.entities.User;
 import by.segg3r.net.task.AbstractTask;
 
-public class RegistrationTask extends AbstractTask {
+public class ClientRegistrationTask extends AbstractTask {
 
 	private static final long serialVersionUID = 1441628265679512155L;
 
 	private String login;
 	private String password;
 
-	public RegistrationTask(String login, String password) {
+	public ClientRegistrationTask(String login, String password) {
 		super();
 		this.login = login;
 		this.password = password;

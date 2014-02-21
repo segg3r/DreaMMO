@@ -1,24 +1,30 @@
 package by.segg3r.dao.impl.db;
 
-import org.hibernate.Session;
-
+import by.segg3r.dao.DBEntityDAOService;
 import by.segg3r.dao.IUserDAO;
 import by.segg3r.entities.User;
 
+/**
+ * The Class UserDAOImplDB.
+ */
 public class UserDAOImplDB implements IUserDAO {
 
+	/**
+	 * Instantiates a new user dao impl db.
+	 */
 	public UserDAOImplDB() {
 		super();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see by.segg3r.dao.IUserDAO#registerUser(java.lang.String,
+	 * java.lang.String)
+	 */
 	public User registerUser(String login, String password) {
-		Session session = DB.getSession();
-
 		User user = new User(login, password);
-		session.save(user);
-		session.close();
-
-		return user;
+		return DBEntityDAOService.saveEntity(user);
 	}
 
 }

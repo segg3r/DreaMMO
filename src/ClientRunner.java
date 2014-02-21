@@ -1,6 +1,6 @@
 import by.segg3r.ClientApplicationContext;
 import by.segg3r.net.Client;
-import by.segg3r.net.task.impl.client.RegistrationTask;
+import by.segg3r.net.task.impl.client.ClientRegistrationTask;
 
 public class ClientRunner {
 
@@ -12,7 +12,7 @@ public class ClientRunner {
 		ClientApplicationContext.initialize(URL, PORT);
 
 		Client client = ClientApplicationContext.getClient();
-		client.sendTask(new RegistrationTask("user", "login"));
+		client.sendTask(new ClientRegistrationTask("user", "login"));
 	}
 
 }
