@@ -1,4 +1,4 @@
-import by.segg3r.ApplicationContext;
+import by.segg3r.ServerApplicationContext;
 
 public class ServerRunner {
 
@@ -6,7 +6,7 @@ public class ServerRunner {
 
 	public static void main(String[] args) {
 
-		ApplicationContext.initialize(PORT);
+		ServerApplicationContext.initialize(PORT);
 
 	}
 

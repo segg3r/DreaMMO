@@ -1,8 +1,6 @@
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
+import by.segg3r.ClientApplicationContext;
 import by.segg3r.net.Client;
+import by.segg3r.net.task.impl.client.RegistrationTask;
 
 public class ClientRunner {
 
@@ -10,17 +8,11 @@ public class ClientRunner {
 	private static final int PORT = 14804;
 
 	public static void main(String[] args) {
-		try {
-			Socket socket = new Socket(URL, PORT);
-			Client client = new Client(socket);
-			client.start();
 
-			System.out.println("Connected to server at " + URL + ":" + PORT);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ClientApplicationContext.initialize(URL, PORT);
+
+		Client client = ClientApplicationContext.getClient();
+		client.sendTask(new RegistrationTask("user", "login"));
 	}
 
 }

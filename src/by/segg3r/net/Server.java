@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.segg3r.net.task.Task;
+import by.segg3r.net.task.AbstractTask;
 
 /**
  * The Class Server.
@@ -62,7 +62,7 @@ public class Server extends Thread {
 	 * @param task
 	 *            the task
 	 */
-	public void sendTaskToAll(Task task) {
+	public void sendTaskToAll(AbstractTask task) {
 		for (Client client : clients) {
 			client.sendTask(task);
 		}

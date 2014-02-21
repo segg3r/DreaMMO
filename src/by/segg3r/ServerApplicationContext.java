@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import by.segg3r.net.Server;
 
-public class ApplicationContext {
+public class ServerApplicationContext {
 
 	private static Server server;
 
@@ -13,7 +13,7 @@ public class ApplicationContext {
 			server = new Server(port);
 			server.start();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error starting server at port " + port);
 		}
 	}
 
