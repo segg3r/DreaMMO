@@ -1,4 +1,5 @@
 import by.segg3r.ServerApplicationContext;
+import by.segg3r.log.impl.ConsoleLog;
 
 public class ServerRunner {
 
@@ -6,7 +7,8 @@ public class ServerRunner {
 
 	public static void main(String[] args) {
 
-		ServerApplicationContext.initialize(PORT);
+		ServerApplicationContext.initializeLog(new ConsoleLog());
+		ServerApplicationContext.initializeServer(PORT);
 
 	}
 

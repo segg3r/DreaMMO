@@ -68,4 +68,20 @@ public class Server extends Thread {
 		}
 	}
 
+	/**
+	 * Send all but one.
+	 * 
+	 * @param exceptedClient
+	 *            the excepted client
+	 * @param task
+	 *            the task
+	 */
+	public void sendAllButOne(Client exceptedClient, AbstractTask task) {
+		for (Client client : clients) {
+			if (!client.equals(exceptedClient)) {
+				client.sendTask(task);
+			}
+		}
+	}
+
 }

@@ -46,10 +46,8 @@ public class Client extends Thread {
 				AbstractTask task = (AbstractTask) in.readObject();
 				clientTaskEnvironment.executeTask(task);
 			}
-		} catch (IOException e) {
-			System.out.println("Lost server connection");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error reading server task");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -63,7 +61,7 @@ public class Client extends Thread {
 		try {
 			out.writeObject(task);
 		} catch (IOException e) {
-			System.out.println("Error sending task to server");
+			System.out.println("Error sending task");
 		}
 	}
 

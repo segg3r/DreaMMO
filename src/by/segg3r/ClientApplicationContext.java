@@ -5,35 +5,82 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import by.segg3r.log.ILog;
-import by.segg3r.log.impl.ConsoleLog;
 import by.segg3r.net.Client;
+import by.segg3r.ui.GameWindow;
 
+/**
+ * The Class ClientApplicationContext.
+ */
 public class ClientApplicationContext {
 
-	private static final ILog LOG = new ConsoleLog();
-
+	private static ILog log;
 	private static Client client;
+	private static GameWindow gameWindow;
 
-	public static void initialize(String url, int port) {
+	/**
+	 * Initialize game window.
+	 */
+	public static void initializeGameWindow() {
+		ClientApplicationContext.gameWindow = new GameWindow();
+	}
+
+	/**
+	 * Initialize log.
+	 * 
+	 * @param log
+	 *            the log
+	 */
+	public static void initializeLog(ILog log) {
+		ClientApplicationContext.log = log;
+	}
+
+	/**
+	 * Initialize client.
+	 * 
+	 * @param url
+	 *            the url
+	 * @param port
+	 *            the port
+	 */
+	public static void initializeClient(String url, int port) {
 		try {
 			Socket socket = new Socket(url, port);
 			client = new Client(socket);
 			client.start();
 
-			LOG.printMessage("Connected to server at " + url + ":" + port);
+			log.printMessage("Connected to server at " + url + ":" + port);
 		} catch (UnknownHostException e) {
-			LOG.printException(e);
+			log.printException(e);
 		} catch (IOException e) {
-			LOG.printException(e);
+			log.printException(e);
 		}
 	}
 
+	/**
+	 * Gets the client.
+	 * 
+	 * @return the client
+	 */
 	public static Client getClient() {
 		return client;
 	}
 
+	/**
+	 * Gets the log.
+	 * 
+	 * @return the log
+	 */
 	public static ILog getLog() {
-		return LOG;
+		return log;
+	}
+
+	/**
+	 * Gets the game window.
+	 * 
+	 * @return the game window
+	 */
+	public static GameWindow getGameWindow() {
+		return gameWindow;
 	}
 
 }
