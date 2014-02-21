@@ -1,5 +1,6 @@
 package by.segg3r.tasks.client;
 
+import by.segg3r.ClientApplicationContext;
 import by.segg3r.entities.User;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
@@ -31,7 +32,8 @@ public class ClientSuccessfullAuthorizationTask extends AbstractTask {
 	 */
 	@Override
 	public void execute() throws TaskExecutionException {
-		System.out.println("Authorization successfull " + user);
+		ClientApplicationContext.getLog().printMessage(
+				"Authorization successfull " + user);
 	}
 
 	/**

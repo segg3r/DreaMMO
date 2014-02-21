@@ -1,5 +1,6 @@
 package by.segg3r.tasks.client;
 
+import by.segg3r.ClientApplicationContext;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
 
@@ -30,7 +31,8 @@ public class ClientMessageTask extends AbstractTask {
 	 */
 	@Override
 	public void execute() throws TaskExecutionException {
-		System.out.println("Server message : " + message);
+		ClientApplicationContext.getLog().printMessage(
+				"Server message : " + message);
 	}
 
 	/**

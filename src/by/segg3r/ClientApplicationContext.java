@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import by.segg3r.log.ILog;
+import by.segg3r.log.impl.ConsoleLog;
 import by.segg3r.net.Client;
 
 public class ClientApplicationContext {
+
+	private static final ILog LOG = new ConsoleLog();
 
 	private static Client client;
 
@@ -16,16 +20,20 @@ public class ClientApplicationContext {
 			client = new Client(socket);
 			client.start();
 
-			System.out.println("Connected to server at " + url + ":" + port);
+			LOG.printMessage("Connected to server at " + url + ":" + port);
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			LOG.printException(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.printException(e);
 		}
 	}
 
 	public static Client getClient() {
 		return client;
+	}
+
+	public static ILog getLog() {
+		return LOG;
 	}
 
 }
