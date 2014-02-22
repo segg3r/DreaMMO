@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.segg3r.ServerApplicationContext;
 import by.segg3r.net.task.AbstractTask;
 
 /**
@@ -29,7 +30,7 @@ public class Server extends Thread {
 		this.serverSocket = new ServerSocket(port);
 		this.clients = new ArrayList<Client>();
 
-		System.out.println("Server initialized at port " + port);
+		ServerApplicationContext.getLog().printMessage("Server initialized at port " + port);
 	}
 
 	/*
@@ -44,7 +45,7 @@ public class Server extends Thread {
 			try {
 				clientSocket = serverSocket.accept();
 
-				System.out.println("Client connected : "
+				ServerApplicationContext.getLog().printMessage("Client connected : "
 						+ clientSocket.getInetAddress());
 
 				Client client = new Client(clientSocket);

@@ -1,20 +1,20 @@
-package by.segg3r.tasks.client;
+package by.segg3r.tasks.server;
 
-import by.segg3r.ClientApplicationContext;
+import by.segg3r.ServerApplicationContext;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
 import by.segg3r.tasks.AbstractExceptionTask;
 
 /**
  * The Class ServerExceptionTask.
  */
-public class ClientExceptionTask extends AbstractExceptionTask {
+public class ServerExceptionTask extends AbstractExceptionTask {
 
 	private static final long serialVersionUID = -2369565242013183395L;
 
 	/**
-	 * Instantiates a new client exception task.
+	 * Instantiates a new server exception task.
 	 */
-	public ClientExceptionTask() {
+	public ServerExceptionTask() {
 		super();
 	}
 
@@ -24,7 +24,7 @@ public class ClientExceptionTask extends AbstractExceptionTask {
 	 * @param exception
 	 *            the exception
 	 */
-	public ClientExceptionTask(TaskExecutionException exception) {
+	public ServerExceptionTask(TaskExecutionException exception) {
 		super(exception);
 	}
 
@@ -35,7 +35,7 @@ public class ClientExceptionTask extends AbstractExceptionTask {
 	 */
 	@Override
 	public void execute() throws TaskExecutionException {
-		ClientApplicationContext.getLog().printException(
+		ServerApplicationContext.getLog().printException(
 				new Exception("Server error : " + getException().getMessage()));
 	}
 

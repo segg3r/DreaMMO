@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import by.segg3r.log.ILog;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.tasks.ClientTaskEnvironment;
 import by.segg3r.tasks.StreamInitializationTask;
@@ -13,6 +14,12 @@ import by.segg3r.tasks.StreamInitializationTask;
  * The Class Client.
  */
 public class Client extends Thread {
+
+	private static ILog log;
+
+	public static void setLog(ILog log) {
+		Client.log = log;
+	}
 
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
@@ -47,7 +54,7 @@ public class Client extends Thread {
 				clientTaskEnvironment.executeTask(task);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			log.printException(e);
 		}
 	}
 
@@ -61,7 +68,7 @@ public class Client extends Thread {
 		try {
 			out.writeObject(task);
 		} catch (IOException e) {
-			System.out.println("Error sending task");
+			log.printException(e);
 		}
 	}
 
