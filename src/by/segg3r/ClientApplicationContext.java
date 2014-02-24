@@ -6,6 +6,8 @@ import java.net.UnknownHostException;
 
 import by.segg3r.log.ILog;
 import by.segg3r.net.Client;
+import by.segg3r.tasklisteners.client.ConnectionWindowDisableButtonsTaskListener;
+import by.segg3r.tasklisteners.client.ConnectionWindowEnableButtonsTaskListener;
 import by.segg3r.ui.ConnectionWindow;
 
 /**
@@ -16,9 +18,22 @@ public class ClientApplicationContext {
 	private static ILog log;
 	private static Client client;
 
+	/**
+	 * Initialize ui.
+	 * 
+	 * @param client
+	 *            the client
+	 */
 	public static void initializeUI(Client client) {
 		ConnectionWindow connectionWindow = new ConnectionWindow();
 		connectionWindow.setVisible(true);
+
+		ConnectionWindowEnableButtonsTaskListener connectionWindowEnableButtonsTaskListener = new ConnectionWindowEnableButtonsTaskListener(
+				connectionWindow);
+		client.addRecieveTaskListener(connectionWindowEnableButtonsTaskListener);
+		ConnectionWindowDisableButtonsTaskListener connectionWindowDisableButtonsTaskListener = new ConnectionWindowDisableButtonsTaskListener(
+				connectionWindow);
+		client.addSendTaskListener(connectionWindowDisableButtonsTaskListener);
 	}
 
 	/**

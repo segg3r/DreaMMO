@@ -12,7 +12,7 @@ import by.segg3r.net.task.AbstractTask;
  * 
  * @see TaskEvent
  */
-public interface TaskListener {
+public interface ITaskListener {
 
 	/**
 	 * Trigger listener.

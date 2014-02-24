@@ -14,6 +14,9 @@ import by.segg3r.ClientApplicationContext;
 import by.segg3r.tasks.server.ServerAuthorizationTask;
 import by.segg3r.tasks.server.ServerRegistrationTask;
 
+/**
+ * The Class ConnectionWindow.
+ */
 public class ConnectionWindow extends JFrame {
 
 	private static final long serialVersionUID = 898918893818719016L;
@@ -22,6 +25,7 @@ public class ConnectionWindow extends JFrame {
 	private JTextField textFieldLogin;
 	private JTextField textFieldPassword;
 	private JButton btnLogin;
+	private JButton btnRegistration;
 
 	/**
 	 * Create the frame.
@@ -52,7 +56,7 @@ public class ConnectionWindow extends JFrame {
 		textFieldPassword.setBounds(116, 33, 163, 20);
 		contentPane.add(textFieldPassword);
 
-		JButton btnRegistration = new JButton("Registration");
+		btnRegistration = new JButton("Registration");
 		btnRegistration.addActionListener(getRegistrationActionListener());
 		btnRegistration.setBounds(173, 65, 110, 23);
 		contentPane.add(btnRegistration);
@@ -63,6 +67,11 @@ public class ConnectionWindow extends JFrame {
 		contentPane.add(btnLogin);
 	}
 
+	/**
+	 * Gets the login action listener.
+	 * 
+	 * @return the login action listener
+	 */
 	private ActionListener getLoginActionListener() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,6 +86,11 @@ public class ConnectionWindow extends JFrame {
 		};
 	}
 
+	/**
+	 * Gets the registration action listener.
+	 * 
+	 * @return the registration action listener
+	 */
 	private ActionListener getRegistrationActionListener() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,11 +105,37 @@ public class ConnectionWindow extends JFrame {
 		};
 	}
 
+	/**
+	 * Gets the login.
+	 * 
+	 * @return the login
+	 */
 	private String getLogin() {
 		return textFieldLogin.getText();
 	}
 
+	/**
+	 * Gets the password.
+	 * 
+	 * @return the password
+	 */
 	private String getPassword() {
 		return textFieldPassword.getText();
+	}
+
+	/**
+	 * Disable buttons.
+	 */
+	public void disableButtons() {
+		btnLogin.setEnabled(false);
+		btnRegistration.setEnabled(false);
+	}
+
+	/**
+	 * Enable buttons.
+	 */
+	public void enableButtons() {
+		btnLogin.setEnabled(true);
+		btnRegistration.setEnabled(true);
 	}
 }

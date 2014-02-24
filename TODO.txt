@@ -1,5 +1,5 @@
 22.02.2014
 
 +- UI log
-- Blocking ui buttons while authorization/registration
++- Blocking ui buttons while authorization/registration
 ! Entering game world
