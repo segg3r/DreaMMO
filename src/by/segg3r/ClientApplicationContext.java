@@ -16,8 +16,9 @@ public class ClientApplicationContext {
 	private static ILog log;
 	private static Client client;
 
-	public static void initializeUI() {
-		new ConnectionWindow().setVisible(true);
+	public static void initializeUI(Client client) {
+		ConnectionWindow connectionWindow = new ConnectionWindow();
+		connectionWindow.setVisible(true);
 	}
 
 	/**

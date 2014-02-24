@@ -15,7 +15,8 @@ public class ClientRunner {
 		ClientTaskEnvironment.setExceptionTask(new ServerExceptionTask());
 
 		ClientApplicationContext.initializeClient(URL, PORT);
-		ClientApplicationContext.initializeUI();
+		ClientApplicationContext.initializeUI(ClientApplicationContext
+				.getClient());
 	}
 
 }
