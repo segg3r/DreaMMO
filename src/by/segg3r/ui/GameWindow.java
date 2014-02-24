@@ -1,22 +1,27 @@
 package by.segg3r.ui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class GameWindow extends JFrame {
 
-	private static final long serialVersionUID = -1897448338640683831L;
+	private static final long serialVersionUID = -2245642979715163586L;
 
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
-	private static final String TITLE = "DreaMMO";
+	private JPanel contentPane;
 
+	/**
+	 * Create the frame.
+	 */
 	public GameWindow() {
-		super();
-
-		this.setSize(WIDTH, HEIGHT);
-		this.setTitle(TITLE);
-
-		this.setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 	}
 
 }

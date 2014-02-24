@@ -9,6 +9,12 @@ import by.segg3r.net.task.exceptions.TaskExecutionException;
  */
 public class ClientTaskEnvironment {
 
+	private static AbstractExceptionTask exceptionTask;
+
+	public static void setExceptionTask(AbstractExceptionTask exceptionTask) {
+		ClientTaskEnvironment.exceptionTask = exceptionTask;
+	}
+
 	private Client client;
 
 	/**
@@ -37,7 +43,8 @@ public class ClientTaskEnvironment {
 				client.sendTask(succeedTask);
 			}
 		} catch (TaskExecutionException e) {
-			client.sendTask(task);
+			exceptionTask.setException(e);
+			client.sendTask(exceptionTask);
 		}
 	}
 

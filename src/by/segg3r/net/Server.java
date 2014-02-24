@@ -48,7 +48,6 @@ public class Server extends Thread {
 
 				ServerApplicationContext.getLog().printMessage(
 						"Client connected : " + clientSocket.getInetAddress());
-
 				Client client = new Client(clientSocket);
 				clients.add(client);
 				client.start();

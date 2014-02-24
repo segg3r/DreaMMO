@@ -6,7 +6,7 @@ import java.net.UnknownHostException;
 
 import by.segg3r.log.ILog;
 import by.segg3r.net.Client;
-import by.segg3r.ui.GameWindow;
+import by.segg3r.ui.ConnectionWindow;
 
 /**
  * The Class ClientApplicationContext.
@@ -15,13 +15,9 @@ public class ClientApplicationContext {
 
 	private static ILog log;
 	private static Client client;
-	private static GameWindow gameWindow;
 
-	/**
-	 * Initialize game window.
-	 */
-	public static void initializeGameWindow() {
-		ClientApplicationContext.gameWindow = new GameWindow();
+	public static void initializeUI() {
+		new ConnectionWindow().setVisible(true);
 	}
 
 	/**
@@ -72,15 +68,6 @@ public class ClientApplicationContext {
 	 */
 	public static ILog getLog() {
 		return log;
-	}
-
-	/**
-	 * Gets the game window.
-	 * 
-	 * @return the game window
-	 */
-	public static GameWindow getGameWindow() {
-		return gameWindow;
 	}
 
 }
