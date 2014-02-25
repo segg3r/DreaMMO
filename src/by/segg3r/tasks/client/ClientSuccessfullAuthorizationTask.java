@@ -35,9 +35,11 @@ public class ClientSuccessfullAuthorizationTask extends AbstractTask {
 	public void execute() throws TaskExecutionException {
 		ClientApplicationContext.getLog().printMessage(
 				"Authorization successfull " + user);
-		
+
 		Client client = ClientApplicationContext.getClient();
 		client.clearTaskListenersLists();
+
+		ClientApplicationContext.initializeGameWindow();
 	}
 
 	/**

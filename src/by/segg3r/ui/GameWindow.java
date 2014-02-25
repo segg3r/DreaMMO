@@ -12,16 +12,21 @@ public class GameWindow extends JFrame {
 
 	private JPanel contentPane;
 
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+	public static final String TITLE = "Client window";
+
 	/**
 	 * Create the frame.
 	 */
 	public GameWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, WIDTH, HEIGHT);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		setTitle(TITLE);
 	}
 
 }

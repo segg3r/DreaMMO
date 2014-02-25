@@ -9,6 +9,7 @@ import by.segg3r.net.Client;
 import by.segg3r.tasklisteners.client.ConnectionWindowDisableButtonsTaskListener;
 import by.segg3r.tasklisteners.client.ConnectionWindowEnableButtonsTaskListener;
 import by.segg3r.ui.ConnectionWindow;
+import by.segg3r.ui.GameWindow;
 
 /**
  * The Class ClientApplicationContext.
@@ -17,6 +18,8 @@ public class ClientApplicationContext {
 
 	private static ILog log;
 	private static Client client;
+	private static ConnectionWindow connectionWindow;
+	private static GameWindow gameWindow;
 
 	/**
 	 * Initialize ui.
@@ -24,8 +27,8 @@ public class ClientApplicationContext {
 	 * @param client
 	 *            the client
 	 */
-	public static void initializeUI(Client client) {
-		ConnectionWindow connectionWindow = new ConnectionWindow();
+	public static void initializeConnectionWindow(Client client) {
+		connectionWindow = new ConnectionWindow();
 		connectionWindow.setVisible(true);
 
 		ConnectionWindowEnableButtonsTaskListener connectionWindowEnableButtonsTaskListener = new ConnectionWindowEnableButtonsTaskListener(
@@ -34,6 +37,13 @@ public class ClientApplicationContext {
 		ConnectionWindowDisableButtonsTaskListener connectionWindowDisableButtonsTaskListener = new ConnectionWindowDisableButtonsTaskListener(
 				connectionWindow);
 		client.addSendTaskListener(connectionWindowDisableButtonsTaskListener);
+	}
+
+	public static void initializeGameWindow() {
+		connectionWindow.dispose();
+
+		gameWindow = new GameWindow();
+		gameWindow.setVisible(true);
 	}
 
 	/**
