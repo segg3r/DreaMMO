@@ -20,6 +20,12 @@ public class Client extends Thread {
 
 	private static ILog log;
 
+	/**
+	 * Sets the log.
+	 * 
+	 * @param log
+	 *            the new log
+	 */
 	public static void setLog(ILog log) {
 		Client.log = log;
 	}
@@ -88,6 +94,12 @@ public class Client extends Thread {
 		}
 	}
 
+	/**
+	 * Adds the send task listener.
+	 * 
+	 * @param taskListener
+	 *            the task listener
+	 */
 	public void addSendTaskListener(ITaskListener taskListener) {
 		this.sendTaskListeners.add(taskListener);
 	}
@@ -100,6 +112,14 @@ public class Client extends Thread {
 	 */
 	public void addRecieveTaskListener(ITaskListener taskListener) {
 		this.recieveTaskListeners.add(taskListener);
+	}
+
+	/**
+	 * Clear task listeners lists.
+	 */
+	public void clearTaskListenersLists() {
+		sendTaskListeners.clear();
+		recieveTaskListeners.clear();
 	}
 
 }
