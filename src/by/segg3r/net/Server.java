@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.segg3r.ServerApplicationContext;
+import by.segg3r.entities.GameCharacter;
 import by.segg3r.net.task.AbstractTask;
 
 /**
@@ -16,6 +17,7 @@ public class Server extends Thread {
 
 	private ServerSocket serverSocket;
 	private List<Client> clients;
+	private List<GameCharacter> gameCharacters;
 
 	/**
 	 * Instantiates a new server.

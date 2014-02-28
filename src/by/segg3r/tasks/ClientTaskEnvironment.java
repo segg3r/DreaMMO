@@ -36,12 +36,8 @@ public class ClientTaskEnvironment {
 	 */
 	public void executeTask(AbstractTask task) {
 		try {
+			task.setClient(client);
 			task.execute();
-
-			AbstractTask succeedTask = task.getSucceedTask();
-			if (succeedTask != null) {
-				client.sendTask(succeedTask);
-			}
 		} catch (TaskExecutionException e) {
 			exceptionTask.setException(e);
 			client.sendTask(exceptionTask);

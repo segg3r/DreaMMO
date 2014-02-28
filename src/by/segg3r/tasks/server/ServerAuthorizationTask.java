@@ -2,8 +2,11 @@ package by.segg3r.tasks.server;
 
 import by.segg3r.dao.DAOFactory;
 import by.segg3r.dao.exceptions.DAOException;
+import by.segg3r.dao.ifaces.IGameCharacterDAO;
 import by.segg3r.dao.ifaces.IUserDAO;
+import by.segg3r.entities.GameCharacter;
 import by.segg3r.entities.User;
+import by.segg3r.net.Client;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
 import by.segg3r.tasks.client.ClientSuccessfullAuthorizationTask;
@@ -19,6 +22,7 @@ public class ServerAuthorizationTask extends AbstractTask {
 	private String password;
 
 	private User user;
+	private GameCharacter gameCharacter;
 
 	/**
 	 * Instantiates a new client authorization task.
@@ -43,20 +47,17 @@ public class ServerAuthorizationTask extends AbstractTask {
 	public void execute() throws TaskExecutionException {
 		try {
 			IUserDAO userDAO = DAOFactory.getUserDAO();
+			IGameCharacterDAO gameCharacterDAO = DAOFactory
+					.getGameCharacterDAO();
+
 			user = userDAO.getUser(login, password);
+			gameCharacter = gameCharacterDAO.getGameCharacter(user);
+
+			Client client = getClient();
+			client.sendTask(new ClientSuccessfullAuthorizationTask(user));
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see by.segg3r.net.task.AbstractTask#getSucceedTask()
-	 */
-	@Override
-	public AbstractTask getSucceedTask() {
-		return new ClientSuccessfullAuthorizationTask(user);
 	}
 
 	/**

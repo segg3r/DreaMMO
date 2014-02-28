@@ -2,15 +2,27 @@ package by.segg3r.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import by.segg3r.dao.impl.db.GameCharacterDAOImplDB;
+
 /**
  * The Class Character.
  */
+@Entity
+@Table(name = GameCharacterDAOImplDB.TABLE_NAME)
 public class GameCharacter extends AbstractDBEntity implements Serializable {
 
 	private static final long serialVersionUID = -493620783708915423L;
 
+	@OneToOne
 	private User user;
+	@Column(name = GameCharacterDAOImplDB.X_FIELD)
 	private int x;
+	@Column(name = GameCharacterDAOImplDB.Y_FIELD)
 	private int y;
 
 	/**

@@ -5,7 +5,20 @@
 
 24.02.2014
 ! Entering game world
-	- Entity character
-	- Creating character in table with registration
+	+- Entity character
+	+- Creating character in table with registration
 	- Create game window
 	- Creating/deleting characters in window as they login/logout
+		- Creating character on login
+			- Adding character to the list of logged characters on server
+			- Send character to all clients that have loggined characters
+			- Send all other characters to loginned client
+		- Deleting character on logout
+			- Delete character from the list of logged characters on server
+			- Delete character from all other clients
+			
+28.02.2014
+- Clearing database option
+- Make password field character invisible
+- Exit client application if server connection lost
+			

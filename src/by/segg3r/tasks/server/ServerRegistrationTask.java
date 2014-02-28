@@ -2,7 +2,10 @@ package by.segg3r.tasks.server;
 
 import by.segg3r.dao.DAOFactory;
 import by.segg3r.dao.exceptions.DAOException;
+import by.segg3r.dao.ifaces.IGameCharacterDAO;
 import by.segg3r.dao.ifaces.IUserDAO;
+import by.segg3r.entities.User;
+import by.segg3r.net.Client;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
 import by.segg3r.tasks.client.ClientMessageTask;
@@ -38,18 +41,21 @@ public class ServerRegistrationTask extends AbstractTask {
 	 */
 	@Override
 	public void execute() throws TaskExecutionException {
-		IUserDAO userDAO = DAOFactory.getUserDAO();
 		try {
-			userDAO.registerUser(login, password);
+			IUserDAO userDAO = DAOFactory.getUserDAO();
+			IGameCharacterDAO gameCharacterDAO = DAOFactory
+					.getGameCharacterDAO();
+
+			User user = userDAO.registerUser(login, password);
+			gameCharacterDAO.createGameCharacter(user);
+
+			Client client = getClient();
+			client.sendTask(new ClientMessageTask(
+					IUserDAO.Messages.SUCCESSFULL_REGISTRATION));
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
 		}
 
-	}
-
-	@Override
-	public AbstractTask getSucceedTask() {
-		return new ClientMessageTask(IUserDAO.Messages.SUCCESSFULL_REGISTRATION);
 	}
 
 	/**

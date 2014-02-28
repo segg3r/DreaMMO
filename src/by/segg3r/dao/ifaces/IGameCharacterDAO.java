@@ -19,4 +19,15 @@ public interface IGameCharacterDAO {
 	 */
 	GameCharacter createGameCharacter(User user) throws DAOException;
 
+	/**
+	 * Gets the game character.
+	 * 
+	 * @param user
+	 *            the user
+	 * @return the game character
+	 * @throws DAOException
+	 *             the DAO exception
+	 */
+	GameCharacter getGameCharacter(User user) throws DAOException;
+
 }
