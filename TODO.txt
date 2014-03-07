@@ -9,7 +9,7 @@
 	+- Creating character in table with registration
 	+- Create game window
 	- Creating/deleting characters in window as they login/logout
-		- Creating character on login
+		+- Creating character on login
 			+- Adding character to the list of logged characters on server
 			+- Send character to all loggined characters
 			+- Send all other characters to loginned client
