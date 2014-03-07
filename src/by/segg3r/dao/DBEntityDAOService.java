@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 
+import by.segg3r.dao.exceptions.EntityDAOServiceException;
 import by.segg3r.dao.impl.db.DB;
 import by.segg3r.entities.AbstractDBEntity;
 
@@ -85,6 +86,47 @@ public class DBEntityDAOService {
 			List<Criterion> criterions) {
 		for (Criterion criterion : criterions) {
 			criteria.add(criterion);
+		}
+	}
+
+	/**
+	 * Gets the entity.
+	 * 
+	 * @param <T>
+	 *            the generic type
+	 * @param entityClass
+	 *            the entity class
+	 * @return the entity
+	 */
+	public static <T extends AbstractDBEntity> T getEntity(Class<T> entityClass)
+			throws EntityDAOServiceException {
+		try {
+			return getEntities(entityClass).get(0);
+		} catch (IndexOutOfBoundsException e) {
+			throw new EntityDAOServiceException(
+					"Error getting entity from database", e);
+		}
+	}
+
+	/**
+	 * Gets the entity by criteria.
+	 * 
+	 * @param <T>
+	 *            the generic type
+	 * @param entityClass
+	 *            the entity class
+	 * @param criterions
+	 *            the criterions
+	 * @return the entity by criteria
+	 */
+	public static <T extends AbstractDBEntity> T getEntityByCriteria(
+			Class<T> entityClass, Criterion... criterions)
+			throws EntityDAOServiceException {
+		try {
+			return getEntitiesByCriteria(entityClass, criterions).get(0);
+		} catch (IndexOutOfBoundsException e) {
+			throw new EntityDAOServiceException(
+					"Error getting entity from database", e);
 		}
 	}
 

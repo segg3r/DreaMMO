@@ -3,11 +3,11 @@
  */
 package by.segg3r.dao.exceptions;
 
-public class DAOException extends Exception {
+public class EntityDAOServiceException extends Exception {
 
 	private static final long serialVersionUID = 7725517694707562956L;
 
-	public DAOException(Throwable throwable) {
+	public EntityDAOServiceException(Throwable throwable) {
 		super(throwable);
 	}
 
@@ -19,7 +19,7 @@ public class DAOException extends Exception {
 	 * @param throwable
 	 *            the throwable
 	 */
-	public DAOException(String message, Throwable throwable) {
+	public EntityDAOServiceException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
 
@@ -29,7 +29,7 @@ public class DAOException extends Exception {
 	 * @param message
 	 *            the message
 	 */
-	public DAOException(String message) {
+	public EntityDAOServiceException(String message) {
 		super(message);
 	}
 

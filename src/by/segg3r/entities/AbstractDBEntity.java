@@ -57,4 +57,16 @@ public abstract class AbstractDBEntity implements Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof AbstractDBEntity)) {
+			return false;
+		}
+		AbstractDBEntity entity = (AbstractDBEntity) obj;
+		return id == entity.id;
+	}
+
 }

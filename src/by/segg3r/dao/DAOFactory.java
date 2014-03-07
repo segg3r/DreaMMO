@@ -1,6 +1,8 @@
 package by.segg3r.dao;
 
+import by.segg3r.dao.ifaces.IGameCharacterDAO;
 import by.segg3r.dao.ifaces.IUserDAO;
+import by.segg3r.dao.impl.db.GameCharacterDAOImplDB;
 import by.segg3r.dao.impl.db.UserDAOImplDB;
 
 /**
@@ -15,6 +17,15 @@ public class DAOFactory {
 	 */
 	public static IUserDAO getUserDAO() {
 		return new UserDAOImplDB();
+	}
+
+	/**
+	 * Gets the game character dao.
+	 * 
+	 * @return the game character dao
+	 */
+	public static IGameCharacterDAO getGameCharacterDAO() {
+		return new GameCharacterDAOImplDB();
 	}
 
 }

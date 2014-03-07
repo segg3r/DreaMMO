@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
 
+import by.segg3r.ServerApplicationContext;
 import by.segg3r.dao.DBEntityDAOService;
 import by.segg3r.dao.exceptions.DAOException;
+import by.segg3r.dao.exceptions.EntityDAOServiceException;
 import by.segg3r.dao.ifaces.IUserDAO;
 import by.segg3r.entities.User;
 
@@ -33,7 +35,8 @@ public class UserDAOImplDB implements IUserDAO {
 	 */
 	public User registerUser(String login, String password) throws DAOException {
 		synchronized (UserDAOImplDB.class) {
-			System.out.println("Registering user with login " + login);
+			ServerApplicationContext.getLog().printMessage(
+					"Registering user with login " + login);
 			List<User> existingUsersWithSameLogin = DBEntityDAOService
 					.getEntitiesByCriteria(User.class,
 							Restrictions.eq(LOGIN_FIELD, login));
@@ -54,15 +57,17 @@ public class UserDAOImplDB implements IUserDAO {
 	 */
 	public User getUser(String login, String password) throws DAOException {
 		synchronized (UserDAOImplDB.class) {
-			System.out.println("Logging in user with login " + login);
-			List<User> users = DBEntityDAOService.getEntitiesByCriteria(
-					User.class, Restrictions.eq(LOGIN_FIELD, login),
-					Restrictions.eq(PASSWORD_FIELD, password));
-			if (users.isEmpty()) {
+			ServerApplicationContext.getLog().printMessage(
+					"Logging in user with login " + login);
+			try {
+				User user = DBEntityDAOService.getEntityByCriteria(User.class,
+						Restrictions.eq(LOGIN_FIELD, login),
+						Restrictions.eq(PASSWORD_FIELD, password));
+				return user;
+			} catch (EntityDAOServiceException e) {
 				throw new DAOException(
 						IUserDAO.Errors.WRONG_LOGIN_PASSWORD_COMBINATION);
 			}
-			return users.get(0);
 		}
 	}
 }

@@ -1,1 +1,25 @@
-+! Getting task by id.
+22.02.2014
+
++- UI log
++- Blocking ui buttons while authorization/registration
+
+24.02.2014
+!- Entering game world
+	+- Entity character
+	+- Creating character in table with registration
+	+- Create game window
+	- Creating/deleting characters in window as they login/logout
+		+- Creating character on login
+			+- Adding character to the list of logged characters on server
+			+- Send character to all loggined characters
+			+- Send all other characters to loginned client
+		w- Deleting character on logout
+			w- Delete character from the list of logged characters on server
+			- Delete character from all other clients
+			
+28.02.2014
+- Clearing database option
++- Make password field character invisible
+- Exit client application if server connection lost
++- Make windows not resizable
++- Check if user already logined
