@@ -19,7 +19,7 @@
 			
 28.02.2014
 - Clearing database option
-- Make password field character invisible
++- Make password field character invisible
 - Exit client application if server connection lost
 +- Make windows not resizable
 - Check if user already logined
