@@ -1,5 +1,6 @@
 package by.segg3r.tasks.server;
 
+import by.segg3r.ServerApplicationContext;
 import by.segg3r.dao.DAOFactory;
 import by.segg3r.dao.exceptions.DAOException;
 import by.segg3r.dao.ifaces.IGameCharacterDAO;
@@ -7,6 +8,7 @@ import by.segg3r.dao.ifaces.IUserDAO;
 import by.segg3r.entities.GameCharacter;
 import by.segg3r.entities.User;
 import by.segg3r.net.Client;
+import by.segg3r.net.Server;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
 import by.segg3r.tasks.client.ClientSuccessfullAuthorizationTask;
@@ -54,6 +56,10 @@ public class ServerAuthorizationTask extends AbstractTask {
 			gameCharacter = gameCharacterDAO.getGameCharacter(user);
 
 			Client client = getClient();
+
+			Server server = ServerApplicationContext.getServer();
+			server.gameCharacterLogin(gameCharacter, client);
+
 			client.sendTask(new ClientSuccessfullAuthorizationTask(user));
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
