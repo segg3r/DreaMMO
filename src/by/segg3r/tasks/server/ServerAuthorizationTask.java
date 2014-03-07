@@ -21,7 +21,9 @@ import by.segg3r.tasks.client.ClientSuccessfullAuthorizationTask;
  */
 public class ServerAuthorizationTask extends AbstractTask {
 
-	private static final long serialVersionUID = 3402653989197611624L;
+	private static final long serialVersionUID = -4637398194326277934L;
+
+	private static final String CHARACTER_IS_ALREADY_LOGINNED_ERROR = "Character is already loginned";
 
 	private String login;
 	private String password;
@@ -51,6 +53,8 @@ public class ServerAuthorizationTask extends AbstractTask {
 	@Override
 	public void execute() throws TaskExecutionException {
 		try {
+			Server server = ServerApplicationContext.getServer();
+
 			IUserDAO userDAO = DAOFactory.getUserDAO();
 			IGameCharacterDAO gameCharacterDAO = DAOFactory
 					.getGameCharacterDAO();
@@ -58,15 +62,20 @@ public class ServerAuthorizationTask extends AbstractTask {
 			user = userDAO.getUser(login, password);
 			gameCharacter = gameCharacterDAO.getGameCharacter(user);
 
-			Client client = getClient();
-			Server server = ServerApplicationContext.getServer();
+			synchronized (ServerAuthorizationTask.class) {
+				if (server.isGameCharacterLoginned(gameCharacter)) {
+					throw new TaskExecutionException(
+							CHARACTER_IS_ALREADY_LOGINNED_ERROR);
+				}
 
-			sendNewCharacterToLoginnedCharacters();
+				Client client = getClient();
+				sendNewCharacterToLoginnedCharacters();
 
-			client.sendTask(new ClientSuccessfullAuthorizationTask(user));
-			setLoginnedCharactersToNewCharacter();
+				client.sendTask(new ClientSuccessfullAuthorizationTask(user));
+				setLoginnedCharactersToNewCharacter();
 
-			server.gameCharacterLogin(gameCharacter, client);
+				server.gameCharacterLogin(gameCharacter, client);
+			}
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
 		}

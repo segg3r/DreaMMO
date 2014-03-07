@@ -22,4 +22,4 @@
 +- Make password field character invisible
 - Exit client application if server connection lost
 +- Make windows not resizable
-- Check if user already logined
++- Check if user already logined

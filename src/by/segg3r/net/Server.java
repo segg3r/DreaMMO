@@ -186,4 +186,18 @@ public class Server extends Thread {
 		return result;
 	}
 
+	/**
+	 * Checks if is game character loginned.
+	 * 
+	 * @param gameCharacter
+	 *            the game character
+	 * @return true, if is game character loginned
+	 */
+	public boolean isGameCharacterLoginned(GameCharacter gameCharacter) {
+		List<GameCharacter> loginnedGameCharacters = getLoginnedGameCharacters();
+		boolean gameCharacterLoginned = loginnedGameCharacters
+				.contains(gameCharacter);
+		return gameCharacterLoginned;
+	}
+
 }
