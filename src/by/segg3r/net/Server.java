@@ -172,4 +172,18 @@ public class Server extends Thread {
 		}
 	}
 
+	/**
+	 * Gets the loginned game characters.
+	 * 
+	 * @return the loginned game characters
+	 */
+	public List<GameCharacter> getLoginnedGameCharacters() {
+		List<GameCharacter> result = new ArrayList<GameCharacter>();
+
+		Set<GameCharacter> loginnedGameCharacters = this.gameCharacterMapping
+				.keySet();
+		result.addAll(loginnedGameCharacters);
+		return result;
+	}
+
 }

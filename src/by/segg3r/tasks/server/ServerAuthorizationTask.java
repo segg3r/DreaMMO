@@ -1,5 +1,7 @@
 package by.segg3r.tasks.server;
 
+import java.util.List;
+
 import by.segg3r.ServerApplicationContext;
 import by.segg3r.dao.DAOFactory;
 import by.segg3r.dao.exceptions.DAOException;
@@ -58,15 +60,43 @@ public class ServerAuthorizationTask extends AbstractTask {
 
 			Client client = getClient();
 			Server server = ServerApplicationContext.getServer();
-			AbstractTask addLoginnedCharacterTask = new ClientAddGameCharacterTask(
-					gameCharacter);
-			server.sendTaskToAllLoginned(addLoginnedCharacterTask);
 
-			server.gameCharacterLogin(gameCharacter, client);
+			sendNewCharacterToLoginnedCharacters();
 
 			client.sendTask(new ClientSuccessfullAuthorizationTask(user));
+			setLoginnedCharactersToNewCharacter();
+
+			server.gameCharacterLogin(gameCharacter, client);
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
+		}
+	}
+
+	/**
+	 * Send new character to loginned characters.
+	 */
+	private void sendNewCharacterToLoginnedCharacters() {
+		System.out.println("sendNewCharacterToLoginnedCharacters");
+
+		Server server = ServerApplicationContext.getServer();
+		AbstractTask addLoginnedCharacterTask = new ClientAddGameCharacterTask(
+				gameCharacter);
+		server.sendTaskToAllLoginned(addLoginnedCharacterTask);
+	}
+
+	/**
+	 * Sets the loginned characters to new character.
+	 */
+	private void setLoginnedCharactersToNewCharacter() {
+		System.out.println("setLoginnedCharactersToNewCharacter");
+		Client client = getClient();
+		Server server = ServerApplicationContext.getServer();
+		List<GameCharacter> loginnedGameCharacters = server
+				.getLoginnedGameCharacters();
+		for (GameCharacter gameCharacter : loginnedGameCharacters) {
+			AbstractTask sendCharacterToNewClientTask = new ClientAddGameCharacterTask(
+					gameCharacter);
+			client.sendTask(sendCharacterToNewClientTask);
 		}
 	}
 

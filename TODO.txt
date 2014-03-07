@@ -12,7 +12,7 @@
 		- Creating character on login
 			+- Adding character to the list of logged characters on server
 			+- Send character to all loggined characters
-			- Send all other characters to loginned client
+			+- Send all other characters to loginned client
 		- Deleting character on logout
 			- Delete character from the list of logged characters on server
 			- Delete character from all other clients
