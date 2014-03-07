@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import by.segg3r.gamelogic.ClientGameLogic;
 import by.segg3r.log.ILog;
 import by.segg3r.net.Client;
 import by.segg3r.tasklisteners.client.ConnectionWindowDisableButtonsTaskListener;
@@ -20,6 +21,7 @@ public class ClientApplicationContext {
 	private static Client client;
 	private static ConnectionWindow connectionWindow;
 	private static GameWindow gameWindow;
+	private static ClientGameLogic clientGameLogic;
 
 	/**
 	 * Initialize ui.
@@ -39,11 +41,23 @@ public class ClientApplicationContext {
 		client.addSendTaskListener(connectionWindowDisableButtonsTaskListener);
 	}
 
+	/**
+	 * Initialize game window.
+	 */
 	public static void initializeGameWindow() {
 		connectionWindow.dispose();
 
+		initializeClientGameLogic();
+
 		gameWindow = new GameWindow();
 		gameWindow.setVisible(true);
+	}
+
+	/**
+	 * Initialize client game logic.
+	 */
+	public static void initializeClientGameLogic() {
+		clientGameLogic = new ClientGameLogic();
 	}
 
 	/**
@@ -94,6 +108,15 @@ public class ClientApplicationContext {
 	 */
 	public static ILog getLog() {
 		return log;
+	}
+
+	/**
+	 * Gets the client game logic.
+	 * 
+	 * @return the client game logic
+	 */
+	public static ClientGameLogic getClientGameLogic() {
+		return clientGameLogic;
 	}
 
 }

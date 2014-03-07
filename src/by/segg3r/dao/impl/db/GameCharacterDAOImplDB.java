@@ -16,7 +16,7 @@ import by.segg3r.entities.User;
 public class GameCharacterDAOImplDB implements IGameCharacterDAO {
 
 	public static final String TABLE_NAME = "gameCharacters";
-	public static final String USER_ID_FIELD = "user_id";
+	public static final String USER_ID_FIELD = "user.id";
 	public static final String X_FIELD = "x";
 	public static final String Y_FIELD = "y";
 

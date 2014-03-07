@@ -11,6 +11,7 @@ import by.segg3r.net.Client;
 import by.segg3r.net.Server;
 import by.segg3r.net.task.AbstractTask;
 import by.segg3r.net.task.exceptions.TaskExecutionException;
+import by.segg3r.tasks.client.ClientAddGameCharacterTask;
 import by.segg3r.tasks.client.ClientSuccessfullAuthorizationTask;
 
 /**
@@ -56,8 +57,11 @@ public class ServerAuthorizationTask extends AbstractTask {
 			gameCharacter = gameCharacterDAO.getGameCharacter(user);
 
 			Client client = getClient();
-
 			Server server = ServerApplicationContext.getServer();
+			AbstractTask addLoginnedCharacterTask = new ClientAddGameCharacterTask(
+					gameCharacter);
+			server.sendTaskToAllLoginned(addLoginnedCharacterTask);
+
 			server.gameCharacterLogin(gameCharacter, client);
 
 			client.sendTask(new ClientSuccessfullAuthorizationTask(user));

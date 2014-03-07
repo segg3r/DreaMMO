@@ -16,7 +16,7 @@ import by.segg3r.dao.impl.db.GameCharacterDAOImplDB;
 @Table(name = GameCharacterDAOImplDB.TABLE_NAME)
 public class GameCharacter extends AbstractDBEntity implements Serializable {
 
-	private static final long serialVersionUID = -493620783708915423L;
+	private static final long serialVersionUID = -7678957269362076861L;
 
 	@OneToOne
 	private User user;
@@ -123,6 +123,17 @@ public class GameCharacter extends AbstractDBEntity implements Serializable {
 	 */
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GameCharacter [user=" + user + ", x=" + x + ", y=" + y
+				+ ", getId()=" + getId() + "]";
 	}
 
 }
