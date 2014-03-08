@@ -55,7 +55,6 @@ public class ServerRegistrationTask extends AbstractTask {
 		} catch (DAOException e) {
 			throw new TaskExecutionException(e.getMessage());
 		}
-
 	}
 
 	/**
